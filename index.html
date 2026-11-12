@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bacaria Kids | Tamberia Education</title>
+<style>
+:root{--bg:#FFF8E7;--card:#fff;--ink:#2B2A4C;--mut:#5b5a7e;--pri:#FFB02E;--ok:#2FBF94;--bad:#E5484D;--line:#E3DCC8;--fs:18px;--ff:system-ui,sans-serif;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#1B1A33;--card:#27254A;--ink:#F4F1FF;--mut:#B9B5E0;--line:#403d78;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs)/1.5 var(--ff);-webkit-tap-highlight-color:transparent}
+main{max-width:720px;margin:0 auto;padding:14px 14px 96px}
+h1{font-size:1.9rem;margin:0}h3{margin:14px 0 6px;font-size:1.15rem}.mut{color:var(--mut)}p{margin:0 0 8px}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:20px;padding:14px;margin:12px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+input,select{font:inherit;padding:10px 12px;border:3px solid var(--ink);border-radius:14px;background:var(--card);color:var(--ink);flex:1;min-width:130px;width:100%}
+.rd{display:flex;gap:10px;align-items:center;margin:6px 0}.rd input{flex:none;width:22px;min-width:0;height:22px;padding:0}
+button{font:inherit;color:inherit;cursor:pointer}
+.go{flex:1;min-width:120px;font-weight:800;padding:12px;border-radius:16px;border:3px solid var(--ink);background:var(--pri);color:#1B1A33}
+.go.alt{background:var(--card);color:var(--ink)}
+.lnk{background:none;border:0;color:#3D8BFF;font-weight:800;text-decoration:underline;padding:6px}
+.fb{min-height:1.6em;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chp{border:2px solid var(--ink);border-radius:999px;background:var(--card);padding:6px 14px;font-weight:700}.chp.on{background:var(--pri);color:#1B1A33}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lc{text-align:left;border:3px solid var(--ink);border-radius:18px;background:var(--card);padding:10px;display:flex;flex-direction:column}.lc b{font-size:1.6rem}.lc.lock{opacity:.5}
+.ban{padding:10px 12px;border-radius:14px;background:#FFF1B8;color:#1B1A33;font-weight:700;margin-bottom:8px}.ban.ur{background:#FFD3D3}
+#nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:3px solid var(--ink);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+#nav button{flex:1;border:0;background:none;font-size:.8rem;font-weight:700;padding:4px}#nav button i{display:block;font-style:normal;font-size:1.4rem}#nav .on{color:#E07B00}
+.mg{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px dashed var(--line);padding:6px 0;flex-wrap:wrap}
+.mono{font-family:ui-monospace,Menlo,monospace;letter-spacing:1px}
+.bar{height:12px;border-radius:8px;background:var(--line);overflow:hidden;margin:8px 0}.bar div{height:100%;width:0;background:var(--ok);transition:width .4s}.say{font-weight:800;font-size:1.3rem;text-align:center;margin:8px 0}.big{font-size:5rem;font-weight:800;text-align:center;line-height:1.1}.opt{font-size:1.8rem;font-weight:800;padding:14px 18px;min-width:72px}.opt.ok{background:var(--ok)}.opt.no{background:#FFD3D3;color:#1B1A33}.ctr{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+#cert{position:fixed;inset:0;background:#fff;color:#2B2A4C;z-index:99;display:none;padding:30px;text-align:center;overflow:auto}#cert.on{display:block}@media print{body>*:not(#cert){display:none!important}#cert .no{display:none}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>🦜 Bacaria Kids</h1><p class="mut" id="sk">by Tamberia Education</p></header>
+
+<section id="login"><div class="card"><h3>Masuk</h3>
+<div class="row"><input id="nm" maxlength="60" placeholder="Nama pengguna atau email" autocomplete="username"></div>
+<div class="row"><input id="pw" type="password" maxlength="40" placeholder="Kata sandi" autocomplete="current-password"></div>
+<div class="row"><button class="go" id="log">Masuk</button><button class="go alt" id="glog">G Masuk dengan Google</button></div>
+<p style="text-align:center;margin:8px 0 0"><button class="lnk" id="lupab">Lupa kata sandi?</button></p>
+<div id="lupa" hidden><div class="row"><input id="lem" type="email" placeholder="Email akun"><button class="go" id="lsend">Kirim tautan</button></div><a id="lwa" class="lnk" target="_blank" rel="noopener">Minta bantuan lewat WhatsApp</a></div>
+<p class="fb" id="pm" aria-live="polite"></p>
+<p style="text-align:center;margin:0">Belum punya akun? <button class="lnk" id="kd">Daftar di sini</button></p></div></section>
+
+<section id="daftar" hidden><div class="card"><h3>Daftar akun baru</h3><p class="mut">Butuh kode dari guru atau admin. Pakai nama panggilan.</p>
+<div class="row"><input id="nm2" maxlength="40" placeholder="Nama pengguna atau email" autocomplete="username"></div>
+<div class="row"><input id="pw2" type="password" maxlength="40" placeholder="Kata sandi (minimal 6)" autocomplete="new-password"></div>
+<p style="margin:12px 0 4px"><b>Saya mendaftar sebagai:</b></p>
+<label class="rd"><input type="radio" name="jenis" value="kelas" checked> Siswa kelas (kode kelas)</label>
+<label class="rd"><input type="radio" name="jenis" value="siswaGuru"> Siswa dari guru kelas</label>
+<label class="rd"><input type="radio" name="jenis" value="luar"> Siswa luar kelas (kode sekali pakai)</label>
+<label class="rd"><input type="radio" name="jenis" value="guruKelas"> Guru kelas (bisa menambah siswa)</label>
+<label class="rd"><input type="radio" name="jenis" value="guru"> Guru saja</label>
+<div class="row"><input id="kg" maxlength="20" placeholder="Kode pendaftaran" autocomplete="off"></div>
+<div class="row"><button class="go" id="reg">Daftar</button><button class="go alt" id="greg">G Daftar dengan Google</button></div>
+<div class="row"><button class="go alt" id="kb">Kembali ke Masuk</button></div>
+<p class="fb" id="pm2" aria-live="polite"></p>
+<p class="mut" id="wa1"></p></div></section>
+
+<section id="home" hidden><div id="exb"></div>
+<h2 id="who" style="margin:6px 0"></h2><p class="mut">Pilih level, lalu ayo belajar!</p><div class="grid" id="grid"></div><p class="fb" id="hm"></p><div id="hx"></div><div id="rl"></div></section>
+<section id="rd" hidden><div class="card"><div class="row" style="justify-content:space-between;align-items:center"><button class="go alt" id="rx" style="flex:none;min-width:0">✕</button><b id="rt"></b><b id="rs">★ 0</b></div><div class="bar"><div id="rb"></div></div><div id="rq" class="say"></div><div id="rbody"></div><p class="fb" id="rf" aria-live="polite"></p></div></section>
+
+<section id="set" hidden><div class="card"><h3>Pengaturan anak</h3><div id="sa"></div>
+<button class="go alt" id="tts" style="width:100%;margin-top:10px">🔊 Coba suara Ria</button></div>
+<div class="card"><h3>Pengaturan orang tua</h3>
+<div id="pinbox"></div><div id="so" hidden></div></div><p class="fb" id="sm" aria-live="polite"></p></section>
+
+<section id="akun" hidden><div class="card"><h3>Pengaturan akun</h3><p class="mut" id="ainfo"></p>
+<h3>Nama lengkap</h3><p class="mut">Hanya dilihat kamu dan guru.</p><div class="row"><input id="nlin" maxlength="60" placeholder="Nama lengkap"><button class="go" id="snl">Simpan</button></div>
+<h3>Email kontak</h3><p class="mut" id="eminfo"></p><div class="row"><input id="emin" type="email" maxlength="80" placeholder="Alamat email"><button class="go" id="sem">Simpan</button></div>
+<h3>Ubah nama pengguna</h3><div class="row"><input id="un" maxlength="14" placeholder="Nama pengguna baru"><button class="go" id="sun">Simpan</button></div>
+<div id="pwbox"><h3>Ubah kata sandi</h3><div class="row"><input id="pw0" type="password" placeholder="Kata sandi sekarang" autocomplete="current-password"></div>
+<div class="row"><input id="pw1" type="password" placeholder="Kata sandi baru (minimal 6)" autocomplete="new-password"><button class="go" id="spw">Simpan</button></div></div>
+<h3>Akun Google</h3><p class="mut" id="gst"></p><button class="go alt" id="glink" style="width:100%">G Hubungkan akun Google</button>
+<p class="fb" id="am" aria-live="polite"></p><button class="go alt" id="out" style="width:100%">Keluar</button></div></section>
+
+<section id="lg" hidden><div class="card"><h3>Langganan</h3><p class="mut" id="lgst"></p>
+<h3>Perpanjang dengan kode</h3><div class="row"><input id="lkode" maxlength="20" placeholder="Kode perpanjangan" autocomplete="off"><button class="go" id="lpak">Perpanjang</button></div>
+<a id="lwa" class="lnk" target="_blank" rel="noopener">Minta kode lewat WhatsApp</a><p class="fb" id="lm" aria-live="polite"></p></div></section>
+
+<section id="adm" hidden><div class="card"><h3 id="admt"></h3><div id="admb"></div></div></section>
+</main>
+
+<nav id="nav" hidden aria-label="Menu utama">
+<button data-p="home"><i>🏠</i>Beranda</button><button data-p="set"><i>🎛️</i>Pengaturan</button><button data-p="akun"><i>👤</i>Akun</button><button data-p="lg"><i>🔑</i>Langganan</button><button data-p="adm" id="nadm" hidden><i>🧑‍🏫</i>Guru</button>
+</nav>
+
+<div id="cert"></div>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,deleteUser,GoogleAuthProvider,signInWithPopup,linkWithPopup,reauthenticateWithCredential,EmailAuthProvider,updatePassword,sendPasswordResetEmail} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,updateDoc,collection,query,where,getDocs,writeBatch} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+/* ===== PENGATURAN: ganti hanya bagian ini ===== */
+const NAMA_SEKOLAH='';          // opsional, contoh 'Tamberia Education Cabang A'
+const FIREBASE_CONFIG={apiKey:"AIzaSyBIqe4Y5OzMxmktJt7rSCXrLYGKfbCVsKQ",authDomain:"bacaria-kids.firebaseapp.com",projectId:"bacaria-kids",storageBucket:"bacaria-kids.firebasestorage.app",messagingSenderId:"347288586072",appId:"1:347288586072:web:d692b61ec679b95726472d"};
+const WA_NOMOR='',WA_NAMA='Admin Tamberia';   // format 628xxxxxxxxxx, kosongkan untuk menyembunyikan WhatsApp
+const FAKE='@pemain.bacaria.app';
+const LEVEL=['Vokal','Konsonan','Suku Kata Pertama','Rangkai Kata','Ekor Huruf','Jembatan Huruf Mati','Vokal Kembar','Bunyi Gabungan','Kluster & Imbuhan','Pembaca Cerita','Cerita Pendek','Cerita Bergambar','Cerita Sehari-hari','Cerita Petualangan','Penulis Cilik'];
+/* ===== AKHIR PENGATURAN ===== */
+
+const fb=initializeApp(FIREBASE_CONFIG),auth=getAuth(fb),fs=getFirestore(fb);
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>'&#'+c.charCodeAt(0)+';');
+const DAY=864e5,hk=u=>u.toLowerCase().replace(/[^a-z0-9]/g,''),isMail=n=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(n.trim()),emOf=n=>isMail(n)?n.trim().toLowerCase():hk(n)+FAKE;
+const cl=s=>s.trim().toUpperCase().replace(/[^A-Z0-9]/g,''),AL='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',rnd=n=>Array.from(crypto.getRandomValues(new Uint32Array(n)),v=>AL[v%AL.length]).join('');
+const fmtD=t=>new Date(t).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+const waH=t=>{const n=WA_NOMOR.replace(/\D/g,'');return n?'https://wa.me/'+n+'?text='+encodeURIComponent(t):''};
+const txt=(s,t)=>{$(s).textContent=t};
+let P=null,uid='',cur='',T=false,GK=false,G=false,reg=false,S={},unlocked=false;
+if(NAMA_SEKOLAH){txt('#sk',NAMA_SEKOLAH+' | by Tamberia Education');document.title=NAMA_SEKOLAH+' | '+document.title}
+['#lwa','#wa1'].forEach(s=>{const h=waH('Assalamualaikum, saya butuh bantuan akun Bacaria Kids.');if(s=='#lwa'){document.querySelectorAll('#lwa').forEach(a=>{if(h)a.href=h;else a.hidden=true})}else if(h)$(s).innerHTML='Belum punya kode? <a class="lnk" target="_blank" rel="noopener" href="'+h+'">Minta lewat WhatsApp ('+esc(WA_NAMA)+')</a>'});
+
+/* ---- navigasi ---- */
+const PG=['login','daftar','home','set','akun','lg','adm','rd'];
+function show(p){PG.forEach(x=>{$('#'+x).hidden=x!=p});$('#nav').hidden=p=='login'||p=='daftar'||p=='rd';document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.p==p));scrollTo(0,0);
+if(p=='home')renderHome();if(p=='set')renderSet();if(p=='akun')renderAkun();if(p=='lg')renderLg();if(p=='adm')renderAdm()}
+$('#nav').onclick=e=>{const b=e.target.closest('button');if(b&&(!P||!P.expired||b.dataset.p=='lg'||b.dataset.p=='akun'))show(b.dataset.p)};
+$('#kd').onclick=()=>show('daftar');$('#kb').onclick=()=>show('login');$('#lupab').onclick=()=>{$('#lupa').hidden=!$('#lupa').hidden};
+
+/* ---- pengaturan anak dan orang tua (tersimpan di players/{uid}.set) ---- */
+const DEF={suara:1,musik:1,huruf:18,avatar:'🦜',bantuan:'banyak',font:'cetak',kec:1,batas:15,ingat:1};
+const SCH=[['a','suara','Suara Ria',[[1,'Hidup'],[0,'Mati']]],['a','musik','Musik latar',[[1,'Hidup'],[0,'Mati']]],['a','huruf','Ukuran huruf',[[18,'Biasa'],[22,'Besar'],[28,'Sangat besar']]],['a','avatar','Avatar',['🦜','🐱','🐰','🐼','🦊'].map(a=>[a,a])],
+['o','bantuan','Mode bantuan',[['banyak','Banyak'],['sedang','Sedang'],['sedikit','Sedikit']]],['o','font','Jenis huruf',[['cetak','Cetak biasa'],['tegak','Tegak bersambung']]],['o','kec','Kecepatan suara Ria',[[0.7,'Pelan'],[1,'Normal'],[1.2,'Cepat']]],['o','batas','Batas belajar per hari',[[10,'10 menit'],[15,'15 menit'],[30,'30 menit'],[0,'Tanpa batas']]],['o','ingat','Pengingat belajar',[[1,'Hidup'],[0,'Mati']]]];
+function applyS(){const r=document.documentElement.style;r.setProperty('--fs',S.huruf+'px');r.setProperty('--ff',S.font=='tegak'?"'Comic Sans MS','Chalkboard SE',cursive":'system-ui,sans-serif');try{localStorage.setItem('bk_set',JSON.stringify(S))}catch(e){}}
+function loadS(x){let l={};try{l=JSON.parse(localStorage.getItem('bk_set')||'{}')}catch(e){}S={...DEF,...l,...(x||{})};applyS()}
+const grp=g=>SCH.filter(s=>s[0]==g).map((s,i)=>`<h3>${s[2]}</h3><div class="chips">${s[3].map(o=>`<button class="chp${S[s[1]]==o[0]?' on':''}" data-k="${s[1]}" data-v="${esc(o[0])}">${esc(o[1])}</button>`).join('')}</div>`).join('');
+async function saveS(){applyS();if(!uid)return;try{await updateDoc(doc(fs,'players',uid),{set:S});txt('#sm','Tersimpan.')}catch(e){txt('#sm','Belum tersimpan. Periksa internet atau masa aktif akun.')}}
+const sha=async s=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(uid+':'+s))),b=>b.toString(16).padStart(2,'0')).join('');
+function renderSet(){txt('#sm','');$('#sa').innerHTML=grp('a');$('#so').innerHTML=grp('o')+'<div class="row"><button class="go alt" id="rpin">Ganti PIN</button></div>';
+$('#so').hidden=!unlocked;$('#pinbox').hidden=unlocked;
+if(!unlocked)$('#pinbox').innerHTML=`<p class="mut">${S.pin?'Masukkan PIN orang tua.':'Buat PIN 4 angka supaya anak tidak mengubah bagian ini.'}</p><div class="row"><input id="pin" type="password" inputmode="numeric" maxlength="4" placeholder="PIN 4 angka"><button class="go" id="pinok">${S.pin?'Buka':'Simpan PIN'}</button></div>`}
+document.addEventListener('click',async e=>{const c=e.target.closest('.chp');if(c&&c.dataset.k){const s=SCH.find(x=>x[1]==c.dataset.k),o=s[3].find(o=>String(o[0])==c.dataset.v);S[s[1]]=o[0];renderSet();saveS()}
+if(e.target.id=='pinok'){const v=$('#pin').value;if(!/^\d{4}$/.test(v)){txt('#sm','PIN harus 4 angka.');return}if(S.pin){if(S.pin!=await sha(v)){txt('#sm','PIN salah.');return}}else{S.pin=await sha(v);await saveS()}unlocked=true;renderSet()}
+if(e.target.id=='rpin'){delete S.pin;unlocked=false;renderSet()}});
+$('#tts').onclick=()=>{if(!S.suara){txt('#sm','Suara Ria sedang mati.');return}try{const u=new SpeechSynthesisUtterance('Halo! Aku Ria. Ayo belajar membaca bersama.');u.lang='id-ID';u.rate=S.kec;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){txt('#sm','Perangkat ini belum mendukung suara.')}};
+
+/* ---- beranda: peta level (sambungkan game di event bacaria:mulai) ---- */
+const open_=i=>T||G||GK||i<=(P?P.max:0);
+function renderHome(){txt('#who','Halo, '+(S.avatar||'')+' '+cur+'!');
+$('#grid').innerHTML=LEVEL.map((n,i)=>`<button class="lc${open_(i)?'':' lock'}" data-lv="${i}"><b>${i+1}</b><span>${esc(n)}</span><small class="mut">${open_(i)?'Terbuka':'Terkunci 🔒'}</small></button>`).join('');
+renderHx();const d=P.exp?Math.max(0,Math.ceil((P.exp-Date.now())/DAY)):0;$('#exb').innerHTML=P.exp?`<div class="ban${d<=7?' ur':''}">⏳ Masa aktif tinggal <b>${d}</b> hari (sampai ${fmtD(P.exp)}).</div>`:''}
+$('#grid').onclick=e=>{const b=e.target.closest('.lc');if(!b)return;const i=+b.dataset.lv;if(!open_(i)){txt('#hm','Selesaikan level sebelumnya dulu ya.');return}txt('#hm','');window.dispatchEvent(new CustomEvent('bacaria:mulai',{detail:{level:i+1,player:P,settings:S}}));if(DATA[i])rondeList(i);else txt('#hm','Level '+(i+1)+' belum punya ronde. Tambahkan di DATA.')};
+
+/* ---- masuk, daftar ---- */
+async function resolveEmail(n){if(isMail(n))return n.trim().toLowerCase();try{const d=await getDoc(doc(fs,'handles',hk(n)));if(d.exists()&&d.data().e)return d.data().e}catch(e){}return hk(n)+FAKE}
+$('#log').onclick=async()=>{const n=$('#nm').value.trim(),p=$('#pw').value;if(!n||!p){txt('#pm','Isi nama dan kata sandi.');return}txt('#pm','Memeriksa...');try{await signInWithEmailAndPassword(auth,await resolveEmail(n),p)}catch(e){txt('#pm','Nama atau kata sandi salah.')}};
+$('#pw').onkeydown=e=>{if(e.key=='Enter')$('#log').click()};
+$('#glog').onclick=async()=>{try{await signInWithPopup(auth,new GoogleAuthProvider())}catch(e){txt('#pm',e.code=='auth/popup-closed-by-user'?'':'Gagal masuk dengan Google. Pastikan domain GitHub Pages sudah diizinkan di Firebase.')}};
+$('#lsend').onclick=async()=>{const m=$('#lem').value.trim();if(!isMail(m)){txt('#pm','Tulis alamat email yang benar.');return}try{await sendPasswordResetEmail(auth,m)}catch(e){}txt('#pm','Jika email itu terdaftar, tautan reset sudah dikirim.')};
+const jenis=()=>document.querySelector('input[name=jenis]:checked').value;
+async function makePlayer(u,tp,k,nama,key){const b=writeBatch(fs),d={nama,max:0,r:{},st:0,guru:false,guruLuar:tp=='guru',siswaLuar:tp=='luar',set:DEF};
+b.set(doc(fs,'claims',u.uid),{tipe:tp,kode:k});if(tp!='kelas')b.update(doc(fs,'kode',k),{dipakai:true,oleh:u.uid});
+if(tp=='guru'||tp=='luar'||tp=='guruKelas')d.exp=Date.now()+365*DAY;
+if(tp=='guruKelas'){d.gk=true;d.gid=u.uid;b.set(doc(fs,'kelompok',u.uid),{guru:u.uid,nama,sekolah:'',kuota:10,terpakai:0,dibuat:Date.now()})}
+if(tp=='siswaGuru'){const kd=await getDoc(doc(fs,'kode',k));if(!kd.exists()||kd.data().tipe!='siswaGuru')throw new Error('kode');const g=kd.data().gid,kg=await getDoc(doc(fs,'kelompok',g));if(!kg.exists())throw new Error('kelompok');const t=kg.data();if((t.terpakai||0)>=(t.kuota||0))throw new Error('kuota');d.sg=true;d.gid=g;b.update(doc(fs,'kelompok',g),{terpakai:(t.terpakai||0)+1})}
+if(key){d.hk=key;b.set(doc(fs,'handles',key),{uid:u.uid,e:u.email})}
+b.set(doc(fs,'players',u.uid),d);await b.commit()}
+const gagal=(e,s)=>txt(s,e.message=='kuota'?'Kuota siswa guru ini sudah penuh. Hubungi gurumu.':'Kode salah atau sudah dipakai (atau nama sudah dipakai). Akun belum dibuat.');
+$('#reg').onclick=async()=>{const n=$('#nm2').value.trim(),p=$('#pw2').value,tp=jenis(),k=cl($('#kg').value),mail=isMail(n);
+if(!mail&&hk(n).length<3){txt('#pm2','Nama minimal 3 huruf atau angka, atau tulis email.');return}if(p.length<6){txt('#pm2','Kata sandi minimal 6 karakter.');return}if(k.length<6){txt('#pm2','Isi kode pendaftaran.');return}
+txt('#pm2','Membuat akun...');reg=true;
+try{const u=(await createUserWithEmailAndPassword(auth,emOf(n),p)).user;try{await makePlayer(u,tp,k,(mail?n.split('@')[0]:n).slice(0,14),mail?'':hk(n))}catch(e){try{await deleteUser(u)}catch(_){}reg=false;setTimeout(()=>gagal(e,'#pm2'),400);return}reg=false;await loadMe(u)}
+catch(e){reg=false;txt('#pm2',e.code=='auth/email-already-in-use'?'Nama ini sudah dipakai. Pilih nama lain.':'Gagal mendaftar. Periksa internet lalu coba lagi.')}};
+$('#greg').onclick=async()=>{const tp=jenis(),k=cl($('#kg').value),n0=$('#nm2').value.trim();if(k.length<6){txt('#pm2','Isi kode pendaftaran.');return}reg=true;let u;
+try{u=(await signInWithPopup(auth,new GoogleAuthProvider())).user}catch(e){reg=false;txt('#pm2','');return}
+try{if(!(await getDoc(doc(fs,'players',u.uid))).exists())await makePlayer(u,tp,k,(n0&&!isMail(n0)?n0:(u.displayName||'pemain').split(' ')[0]).slice(0,14),'')}catch(e){try{await deleteUser(u)}catch(_){await signOut(auth)}reg=false;setTimeout(()=>gagal(e,'#pm2'),400);return}
+reg=false;await loadMe(u)};
+
+/* ---- sesi ---- */
+async function loadMe(u){uid=u.uid;const d=await getDoc(doc(fs,'players',uid));
+if(!d.exists()){try{await deleteUser(u)}catch(e){await signOut(auth)}setTimeout(()=>{show('login');txt('#pm','Akun ini belum terdaftar atau sudah dihapus. Daftar dulu dengan kode.')},400);return}
+const x=d.data();P={max:x.max||0,r:x.r||{},st:x.st||0,exp:x.exp||0,hk:x.hk||'',gid:x.gid||'',nl:x.nl||'',em:x.em||'',expired:!!(x.exp&&Date.now()>x.exp),ms:x.ms||{},sk:x.sk||null};
+T=x.guru===true;GK=!T&&x.gk===true;G=!T&&(x.guruLuar===true||GK);cur=x.nama||'pemain';unlocked=false;loadS(x.set);
+$('#nadm').hidden=!(T||GK);show(P.expired?'lg':'home')}
+onAuthStateChanged(auth,u=>{if(reg)return;if(!u){P=null;uid='';show('login');return}loadMe(u).catch(()=>{txt('#pm','Gagal memuat akun. Periksa internet atau aturan Firestore.');show('login')})});
+$('#out').onclick=()=>signOut(auth);
+
+/* ---- akun ---- */
+const am=t=>txt('#am',t),FK=u=>!!(u.email&&u.email.endsWith(FAKE));
+function renderAkun(){const u=auth.currentUser;if(!u)return;const pv=u.providerData.map(p=>p.providerId),hasG=pv.includes('google.com');
+txt('#ainfo','Nama: '+cur+(pv.includes('password')?'':'. Kamu masuk lewat Google.'));$('#pwbox').hidden=!pv.includes('password');$('#glink').hidden=hasG;
+txt('#gst',hasG?'Google sudah terhubung.':'Belum terhubung. Hubungkan agar bisa pulihkan akun jika lupa kata sandi.');$('#nlin').value=P.nl;$('#emin').value='';
+txt('#eminfo',!FK(u)?'Email masuk: '+u.email:(P.em?'Email kontak: '+P.em:'Belum ada email kontak.'));am('')}
+$('#snl').onclick=async()=>{try{await updateDoc(doc(fs,'players',uid),{nl:$('#nlin').value.trim().slice(0,60)});P.nl=$('#nlin').value.trim();am('Nama lengkap tersimpan.')}catch(e){am('Gagal menyimpan.')}};
+$('#sem').onclick=async()=>{const m=$('#emin').value.trim();if(!isMail(m)){am('Tulis alamat email yang benar.');return}try{await updateDoc(doc(fs,'players',uid),{em:m.toLowerCase()});P.em=m.toLowerCase();renderAkun();am('Email kontak tersimpan.')}catch(e){am('Gagal menyimpan.')}};
+$('#sun').onclick=async()=>{const u=auth.currentUser;let n=$('#un').value.trim().slice(0,14);if(!u)return;const fk=FK(u);if(fk&&hk(n).length<3){am('Nama minimal 3 huruf atau angka.');return}if(!fk&&n.length<2){am('Nama terlalu pendek.');return}
+try{if(fk&&hk(n)!=P.hk){const k=hk(n),b=writeBatch(fs);b.set(doc(fs,'handles',k),{uid,e:u.email});if(P.hk)b.delete(doc(fs,'handles',P.hk));b.update(doc(fs,'players',uid),{nama:n,hk:k});await b.commit();P.hk=k}else await updateDoc(doc(fs,'players',uid),{nama:n});cur=n;renderAkun();am('Nama diubah menjadi '+n+'. Masuk berikutnya pakai nama ini.')}catch(e){am('Gagal. Nama itu mungkin sudah dipakai.')}};
+$('#spw').onclick=async()=>{const u=auth.currentUser,p1=$('#pw1').value;if(p1.length<6){am('Kata sandi baru minimal 6 karakter.');return}try{await reauthenticateWithCredential(u,EmailAuthProvider.credential(u.email,$('#pw0').value));await updatePassword(u,p1);$('#pw0').value='';$('#pw1').value='';am('Kata sandi berhasil diubah.')}catch(e){am(e.code=='auth/wrong-password'||e.code=='auth/invalid-credential'?'Kata sandi sekarang salah.':'Gagal mengubah kata sandi.')}};
+$('#glink').onclick=async()=>{try{await linkWithPopup(auth.currentUser,new GoogleAuthProvider());renderAkun();am('Akun Google berhasil dihubungkan.')}catch(e){am(e.code=='auth/credential-already-in-use'?'Akun Google itu sudah dipakai akun lain.':'Gagal menghubungkan Google.')}};
+
+/* ---- langganan ---- */
+function renderLg(){const d=P.exp?Math.ceil((P.exp-Date.now())/DAY):0;txt('#lgst',!P.exp?'Akun tanpa batas waktu.':P.expired?'Masa aktif sudah habis ('+fmtD(P.exp)+'). Masukkan kode perpanjangan.':'Aktif sampai '+fmtD(P.exp)+' ('+d+' hari lagi).');$('#lkode').value='';txt('#lm','');
+const h=waH('Assalamualaikum, saya ingin memperpanjang akun Bacaria Kids, nama pengguna: '+cur);$('#lwa').hidden=!h;if(h)$('#lwa').href=h}
+$('#lpak').onclick=async()=>{const k=cl($('#lkode').value);if(k.length<6){txt('#lm','Isi kode perpanjangan.');return}if(!P.exp){txt('#lm','Akunmu tidak punya batas waktu.');return}
+try{const ne=Math.max(P.exp,Date.now())+365*DAY,b=writeBatch(fs);b.update(doc(fs,'players',uid),{exp:ne,rk:k});b.update(doc(fs,'kode',k),{dipakai:true,oleh:uid});await b.commit();P.exp=ne;P.expired=false;txt('#lm','Berhasil. Aktif sampai '+fmtD(ne)+'.');renderLg()}catch(e){txt('#lm','Kode salah atau sudah dipakai.')}};
+
+/* ---- guru: buat kode, kode kelas, daftar siswa ---- */
+async function renderAdm(){txt('#admt',T?'Admin':'Guru kelas');const b=$('#admb');let h='';
+if(T)h+='<h3>Kode kelas</h3><div class="row"><input id="kk" maxlength="20" placeholder="Kode kelas baru"><button class="go" id="kks">Simpan</button></div>';
+const ops=T?[['guru','Guru saja'],['luar','Siswa luar kelas'],['guruKelas','Guru kelas'],['langganan','Perpanjangan 1 tahun'],['kuota','Tambah kuota 10 siswa']]:[['siswaGuru','Siswa saya']];
+h+=`<h3>Buat kode sekali pakai</h3><select id="gt">${ops.map(o=>`<option value="${o[0]}">${o[1]}</option>`).join('')}</select><div class="row"><input id="gn" type="number" min="1" max="10" value="1"><button class="go" id="gb">Buat kode</button></div><p class="fb" id="gm"></p><div id="gl">Memuat...</div>`;
+if(GK)h+='<h3>Siswa saya</h3><div id="gs">Memuat...</div>';b.innerHTML=h;listAdm()}
+async function listAdm(){try{const q=T?query(collection(fs,'kode'),where('dipakai','==',false)):query(collection(fs,'kode'),where('gid','==',uid));const s=await getDocs(q);
+$('#gl').innerHTML=s.docs.filter(d=>!d.data().dipakai).map(d=>`<div class="mg"><span class="mono">${d.id}</span><span class="mut">${esc(d.data().tipe)}</span></div>`).join('')||'<p class="mut">Belum ada kode yang belum dipakai.</p>';
+if(GK){const kg=await getDoc(doc(fs,'kelompok',uid)),ps=await getDocs(query(collection(fs,'players'),where('gid','==',uid)));const t=kg.exists()?kg.data():{};
+$('#gs').innerHTML=`<p class="mut">Kuota: ${t.terpakai||0} dari ${t.kuota||0} siswa.</p>`+ps.docs.filter(d=>d.id!=uid).map(d=>{const x=d.data();return`<div class="mg"><span>${esc(x.nama||'')} <small class="mut">level ${(x.max||0)+1}</small></span><button class="chp" data-rst="${d.id}">Reset</button></div>`}).join('')}}catch(e){$('#gl').textContent='Gagal memuat. Periksa internet atau aturan Firestore.'}}
+document.addEventListener('click',async e=>{
+if(e.target.id=='kks'){const k=cl($('#kk').value);if(k.length<6){txt('#gm','Kode kelas minimal 6 huruf atau angka.');return}try{await setDoc(doc(fs,'config','kelas'),{kode:k});txt('#gm','Kode kelas disimpan.')}catch(x){txt('#gm','Gagal menyimpan.')}}
+if(e.target.id=='gb'){const t=$('#gt').value,n=Math.max(1,Math.min(10,+$('#gn').value||1)),b=writeBatch(fs);for(let i=0;i<n;i++){const d={tipe:t,dipakai:false,dibuat:Date.now()};if(!T)d.gid=uid;b.set(doc(fs,'kode',rnd(8)),d)}try{await b.commit();txt('#gm',n+' kode dibuat.');listAdm()}catch(x){txt('#gm','Gagal membuat kode.')}}
+if(e.target.dataset.rst&&confirm('Reset level dan ronde siswa ini?')){try{await updateDoc(doc(fs,'players',e.target.dataset.rst),{max:0,r:{},st:0});listAdm()}catch(x){txt('#gm','Gagal reset.')}}});
+
+/* ===== ISI PERMAINAN LEVEL 1-15 =====
+Tambah ronde: kata baru di daftar W('kata:emoji,...'), kalimat di Z([...]), cerita di ST(...). Satu item = satu ronde 10 latihan. */
+const W=x=>x.split(',').map(y=>{const[k,e]=y.split(':');return[k,k,e]}),V=x=>x.split(',').map(y=>y.split(':')),Z=a=>a.map(x=>[x,x,'']);
+const ST=(j,s,q,b)=>({s,j,q,b});
+const CON='bcdfghjklmnpqrstvwxyz';
+const DATA={
+0:[...V('a:ayam:🐔,i:ikan:🐟,u:ulat:🐛,e:ember:🪣,o:orangutan:🦧'),...W('enam:6️⃣,telur:🥚,besar:🐘,kelas:🏫,bebek:🦆,leher:🦒,sate:🍢,meja:🪑')],
+1:V('b:bebek:🦆,c:cicak:🦎,d:domba:🐑,f:foto:📷,g:gajah:🐘,h:harimau:🐯,j:jerapah:🦒,k:kucing:🐱,l:lilin:🕯️,m:monyet:🐒,n:nanas:🍍,p:piring:🍽️,q:quran:📖,r:rusa:🦌,s:sapi:🐄,t:tikus:🐭,v:vas:🏺,w:wortel:🥕,x:xilofon:🎹,y:yoyo:🪀,z:zebra:🦓'),
+2:[...'aiueo'].flatMap(v=>[...CON].map(c=>[c+v,c+v,''])),
+3:[...W('mama:👩,papa:👨,bola:⚽,mata:👁️,kaca:🪟,raja:🤴,buku:📕,susu:🥛,kopi:☕,topi:🧢,sate:🍢,meja:🪑,baju:👕,sapu:🧹,gigi:🦷,api:🔥,nasi:🍚,roda:🛞,kuku:💅,tali:🪢'),...Z(['saya suka bola','mama beli kopi','papa baca buku','nama saya Ria','adik makan nasi'])],
+4:W('makan:🍽️,bulan:🌙,hujan:🌧️,beras:🍚,pasar:🛒,ayam:🐔,botol:🍼,kapal:🚢,mobil:🚗,masak:🍳,surat:✉️,semut:🐜,sakit:🤒,rumah:🏠,gajah:🐘,murid:🧒,kitab:📖,minum:🥤,tidur:😴,pagar:🚧'),
+5:[...W('pintu:🚪,lampu:💡,kertas:📄,kantor:🏢,bambu:🎋,warna:🎨,kursi:🪑,cokelat:🍫,dokter:🧑‍⚕️,taksi:🚕,piknik:🧺,pensil:✏️,gunting:✂️,kelinci:🐰,sepatu:👟'),...Z(['ayah parkir mobil di depan kantor','ibu beli bantal warna biru'])],
+6:W('tupai:🐿️,sungai:🏞️,pantai:🏖️,pulau:🏝️,hijau:🟢,pisau:🔪,kerbau:🐃,radio:📻,video:📹,buah:🍎,daun:🍃,haus:🥤,damai:🕊️,kuas:🖌️'),
+7:W('burung:🐦,pisang:🍌,payung:☂️,tangan:✋,bunga:🌸,nyamuk:🦟,nyanyi:🎤,minyak:🛢️,penyu:🐢,sunyi:🤫,syukur:🙏,syair:📜,khusus:⭐,akhir:🏁,tinggi:📏,bangun:⏰'),
+8:W('pramuka:⚜️,brokoli:🥦,drama:🎭,traktor:🚜,plastik:🥤,klinik:🏥,stasiun:🚉,sprei:🛏️,berlari:🏃,bermain:🧸,melihat:👀,menulis:✍️,membaca:📖,memasak:🍳,dibuka:📬,ditutup:🚪'),
+9:Z(['Ibu pergi ke pasar, membeli buah apel dan jeruk.','Apakah kamu senang?','Ayo, kita berangkat sekarang!','Burung terbang tinggi di atas gunung.','Adik bermain di taman.','Kita harus selalu bersyukur kepada Tuhan.','Penyu berenang di laut yang sangat sunyi.','Ayah membuka pintu kelas.']),
+10:[ST('Adik dan Kucing',['Adik punya kucing putih.','Kucing itu suka minum susu.','Setiap pagi adik memberi susu.','Kucing pun mengeong senang.'],[['Siapa yang punya kucing?','Adik',['Ibu','Bapak']],['Apa warna kucingnya?','Putih',['Hitam','Biru']],['Apa yang disukai kucing?','Susu',['Ikan','Nasi']],['Kapan adik memberi susu?','Setiap pagi',['Malam hari','Sore hari']]],['Kucing itu berwarna putih.',1]),
+ST('Ayam Ibu',['Ibu punya ayam di kebun.','Ayam itu makan jagung.','Ayam bertelur setiap hari.','Ibu senang mengambil telur.'],[['Di mana ayam ibu?','Di kebun',['Di sekolah','Di pasar']],['Apa makanan ayam?','Jagung',['Susu','Roti']],['Apa yang ayam hasilkan?','Telur',['Susu','Buah']],['Siapa yang mengambil telur?','Ibu',['Adik','Kakak']]],['Ayam makan susu.',0])],
+11:[ST('Pagi Hari',['Pagi hari aku bangun tidur.','Lalu aku mandi dan sikat gigi.','Kemudian aku sarapan nasi.','Akhirnya aku berangkat ke sekolah.'],[['Apa yang terjadi pertama?','Bangun tidur',['Sarapan','Berangkat']],['Apa yang dilakukan setelah mandi?','Sarapan',['Tidur','Bermain']],['Apa yang terjadi terakhir?','Berangkat ke sekolah',['Mandi','Bangun tidur']],['Apa yang dimakan saat sarapan?','Nasi',['Roti','Buah']]],['Aku mandi sebelum sarapan.',1]),
+ST('Ke Pasar',['Ibu pergi ke pasar naik motor.','Pertama ibu membeli sayur.','Lalu ibu membeli ikan.','Akhirnya ibu pulang membawa belanja.'],[['Ibu naik apa ke pasar?','Motor',['Bus','Sepeda']],['Apa yang dibeli pertama?','Sayur',['Ikan','Buah']],['Apa yang dibeli setelah sayur?','Ikan',['Roti','Susu']],['Apa yang dilakukan ibu terakhir?','Pulang',['Membeli sayur','Naik motor']]],['Ibu membeli ikan lebih dulu.',0])],
+12:[ST('Hujan di Sore Hari',['Sore ini hujan turun deras.','Adik lupa membawa payung.','Adik basah kuyup karena hujan.','Ibu memberi handuk hangat.'],[['Mengapa adik basah?','Karena hujan',['Karena mandi','Karena main air']],['Apa yang adik lupa bawa?','Payung',['Tas','Topi']],['Kapan hujan turun?','Sore hari',['Pagi hari','Malam hari']],['Apa yang ibu berikan?','Handuk',['Payung','Susu']]],['Adik membawa payung.',0]),
+ST('Kakak Sakit',['Kakak sakit demam.','Ia minum obat dan banyak air.','Kakak istirahat di kamar.','Besok kakak sembuh dan sekolah.'],[['Mengapa kakak istirahat?','Karena sakit',['Karena libur','Karena malas']],['Apa yang kakak minum?','Obat dan air',['Susu','Kopi']],['Di mana kakak istirahat?','Di kamar',['Di sekolah','Di pasar']],['Kapan kakak sekolah lagi?','Besok',['Kemarin','Nanti malam']]],['Kakak sembuh dan sekolah besok.',1])],
+13:[ST('Budi dan Dompet',['Budi menemukan dompet di jalan.','Ia tidak mengambil uangnya.','Budi memberikan dompet itu kepada polisi.','Pemilik dompet sangat senang.'],[['Bagaimana sifat Budi?','Jujur',['Pelit','Malas']],['Apa yang Budi temukan?','Dompet',['Buku','Bola']],['Bagaimana perasaan pemilik dompet?','Senang',['Sedih','Marah']],['Apa pesan cerita ini?','Kita harus jujur',['Kita harus malas','Kita harus pelit']]],['Budi mengambil uang itu.',0]),
+ST('Berbagi Bekal',['Sinta membawa bekal roti.','Teman Sinta lupa membawa bekal.','Sinta membagi rotinya.','Mereka makan bersama dengan gembira.'],[['Bagaimana sifat Sinta?','Suka berbagi',['Pelit','Nakal']],['Mengapa teman Sinta lapar?','Lupa bawa bekal',['Tidak mau makan','Sakit']],['Bagaimana perasaan mereka?','Gembira',['Marah','Takut']],['Apa pesan cerita ini?','Berbagi itu baik',['Makan sendiri','Jangan menolong']]],['Sinta membagi rotinya.',1])],
+14:[ST('Bermain di Pantai',['Hari Minggu kami pergi ke pantai.','Aku membangun istana pasir.','Burung terbang di atas laut.','Kami pulang dengan gembira.'],[['Ke mana kami pergi?','Ke pantai',['Ke pasar','Ke kebun']],['Apa yang dibangun?','Istana pasir',['Rumah','Jembatan']],['Apa yang terbang di atas laut?','Burung',['Ikan','Kupu-kupu']],['Bagaimana perasaan kami?','Gembira',['Sedih','Takut']]],['Kami pergi ke gunung.',0]),
+ST('Hari Minggu di Kebun Binatang',['Hari Minggu pagi Budi pergi ke kebun binatang.','Budi melihat gajah besar makan rumput.','Burung merak terbang di dekat kolam.','Budi makan es krim cokelat manis.'],[['Siapa yang pergi ke kebun binatang?','Budi',['Ayah','Adik']],['Apa yang dimakan gajah?','Rumput',['Daging','Roti']],['Burung apa yang terbang?','Merak',['Elang','Bebek']],['Apa yang Budi makan?','Es krim',['Roti','Nasi']]],['Gajah itu kecil.',0])]};
+
+DATA[10].push(ST('Bola Adik',['Adik punya bola merah.','Bola itu dimainkan di halaman.','Kakak ikut bermain bola.','Mereka bermain sampai sore.'],[['Apa warna bola adik?','Merah',['Biru','Hijau']],['Di mana bola dimainkan?','Di halaman',['Di kelas','Di pasar']],['Siapa yang ikut bermain?','Kakak',['Ibu','Bapak']],['Sampai kapan mereka bermain?','Sampai sore',['Sampai pagi','Sampai malam']]],['Bola adik berwarna merah.',1]));
+DATA[11].push(ST('Membuat Teh',['Pertama ibu merebus air.','Lalu ibu menuang air ke gelas.','Kemudian ibu memasukkan teh.','Akhirnya teh siap diminum.'],[['Apa yang dilakukan ibu pertama?','Merebus air',['Minum teh','Membeli gula']],['Apa yang dituang ke gelas?','Air',['Susu','Kopi']],['Apa yang terjadi terakhir?','Teh siap diminum',['Merebus air','Menuang air']],['Siapa yang membuat teh?','Ibu',['Adik','Ayah']]],['Teh siap sebelum air direbus.',0]));
+DATA[12].push(ST('Tanaman Layu',['Bunga di taman menjadi layu.','Adik lupa menyiramnya tiga hari.','Karena kering, daunnya mengecil.','Adik menyiram dan bunga hidup lagi.'],[['Mengapa bunga layu?','Tidak disiram',['Terlalu banyak air','Dipetik']],['Berapa hari adik lupa menyiram?','Tiga hari',['Satu hari','Lima hari']],['Apa yang terjadi pada daunnya?','Mengecil',['Membesar','Memerah']],['Apa yang dilakukan adik akhirnya?','Menyiram bunga',['Memetik bunga','Menjual bunga']]],['Bunga hidup lagi setelah disiram.',1]));
+DATA[13].push(ST('Kelinci dan Kura-kura',['Kelinci sombong karena larinya cepat.','Kura-kura berjalan pelan tetapi tidak berhenti.','Kelinci tidur di tengah jalan.','Kura-kura sampai lebih dulu.'],[['Bagaimana sifat kelinci?','Sombong',['Rajin','Baik hati']],['Siapa yang berjalan pelan?','Kura-kura',['Kelinci','Gajah']],['Siapa yang sampai lebih dulu?','Kura-kura',['Kelinci','Gajah']],['Apa pesan cerita ini?','Jangan sombong dan teruslah berusaha',['Tidur itu baik','Berlari itu salah']]],['Kelinci sampai lebih dulu.',0]));
+/* Sub-level: [nama, dari, sampai, jumlah ronde, bonus?] = potongan DATA level itu */
+const SUB=[[['1A',0,5,10],['1B',5,13,10]],[['2A',0,10,10],['2B',10,21,10]],[['3A',0,21,26],['3B',21,42,26],['3C',42,63,26],['3D',63,84,26],['3E',84,105,26],['3F',0,105,26]],[['4A',0,10,20],['4B',10,20,20],['4C',20,25,20]],[['5A',0,4,20],['5B',4,9,20],['5C',9,13,20],['5D',13,17,20],['5E',17,20,20,1],['5F',0,20,20]],[['6A',0,6,20],['6B',6,12,20],['6C',12,17,20]],[['7A',0,6,20],['7B',6,14,20],['7C',0,14,20]],[['8A',0,5,20],['8B',5,10,20],['8C',10,14,20],['8D',0,16,20]],[['9A',0,4,20],['9B',4,8,20],['9C',8,12,20],['9D',12,16,20],['9E',0,16,20]],[['10A',0,4,20],['10B',4,8,20],['10C',0,8,20],['10D',0,8,20]],...[11,12,13,14,15].map(n=>[[''+n,0,99,20]])];
+const PH=['Kenalan','Latihan','Campuran','Mahir','Ujian'],phase=(r,n)=>r==n-1?4:r<n*.25?0:r<n*.5?1:r<n*.75?2:3;
+const shuf=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const say=t=>{if(!S.suara||!t)return;try{const u=new SpeechSynthesisUtterance(t);u.lang='id-ID';u.rate=S.kec;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}};
+const star=n=>'★'.repeat(n)+'☆'.repeat(3-n);
+const rk=(l,s,r)=>l+'-'+s+'-'+r,got=(l,s,r)=>(P.r[rk(l,s,r)]||0)>0;
+const lastReq=l=>{let j=SUB[l].length-1;while(SUB[l][j][4])j--;return j},prevReq=(l,s)=>{let j=s-1;while(j>0&&SUB[l][j][4])j--;return j};
+const canR=(l,s,r)=>T||G||(r>0?got(l,s,r-1):s==0?open_(l):got(l,prevReq(l,s),SUB[l][prevReq(l,s)][3]-1));
+function rondeList(lv,si=0){const sb=SUB[lv],n=sb[si][3];$('#rl').innerHTML='<h3>Level '+(lv+1)+': '+esc(LEVEL[lv])+'</h3><div class="chips">'+sb.map((x,i)=>`<button class="chp${i==si?' on':''}" data-sl="${lv}-${i}">${x[0]}${x[4]?' (bonus)':''} ${got(lv,i,x[3]-1)?'✓':''}</button>`).join('')+'</div><p class="mut">Sub-level '+sb[si][0]+': '+n+' ronde</p><div class="chips">'+Array.from({length:n},(_,r)=>{const t=P.r[rk(lv,si,r)]||0,ok=canR(lv,si,r);return`<button class="chp" ${ok?'':'disabled'} data-rl="${lv}-${si}-${r}">${r+1}${r==n-1?' 🎓':''} ${t?star(t):ok?'':'🔒'}</button>`}).join('')+'</div>'}
+$('#rl').onclick=e=>{const a=e.target.closest('[data-sl]'),b=e.target.closest('[data-rl]');if(a){const[l,s]=a.dataset.sl.split('-').map(Number);rondeList(l,s)}if(b&&!b.disabled){const[l,s,r]=b.dataset.rl.split('-').map(Number);play(l,s,r)}};
+function roundItems(lv,si,r){const[,a,b,n]=SUB[lv][si],I=DATA[lv].slice(a,b),ph=phase(r,n);if(I[0].s||ph==0)return[I[r%I.length]];if(ph==1)return shuf(I).slice(0,3);
+if(ph==2){const m=DATA[lv].filter(x=>P.ms&&P.ms[x[0]]).slice(0,2);return shuf([...shuf(I).slice(0,4),...m])}return shuf(I).slice(0,ph==3?5:10)}
+function storyEx(lv,s){const M=q=>({t:'pilih',q:q[0],say:q[0],o:shuf([q[1],...q[2]]),a:q[1]}),f=s.s,tl=n=>({t:'tulis',q:n}),w=lv==14;
+return[{t:'baca',q:'Baca nyaring: '+s.j,txt:f.join(' '),say:f.join(' ')},M(s.q[0]),M(s.q[1]),M(s.q[2]),
+{t:'pilih',q:s.b[0],say:s.b[0],o:['Benar','Salah'],a:s.b[1]?'Benar':'Salah'},
+{t:'susun',q:'Susun kalimat jadi cerita',u:f.slice(0,3),j:' ',a:f.slice(0,3).join(' ')},
+w?tl('Tulis awal ceritamu'):M(s.q[3]),w?tl('Tulis tengah ceritamu'):tl('Tulis jawaban: '+s.q[0][0]),
+w?tl('Tulis akhir ceritamu'):{...M(s.q[1]),time:10,q:'Cepat! '+s.q[1][0]},
+w?tl('Ceritakan ulang: '+s.j):{t:'tulis',q:'Dengar, lalu tulis kalimat pertama',say:f[0]}]}
+function makeEx(lv,items,ph){const D=DATA[lv];if(items[0].s)return storyEx(lv,items[0]);
+const pool=[...new Set(D.map(x=>x[0]))],kp=[...new Set(D.map(x=>x[1]))],AU=[...new Set(kp.map(w=>w.includes(' ')?w.split(' ').pop():w[0]))],hint=ph==0||(ph<3&&S.bantuan!='sedikit'),tm=ph>=2?8:0;
+const O=(a,l,n)=>shuf([a,...shuf(l.filter(x=>x!=a)).slice(0,n-1)]),bg=x=>x.length<=8?{big:x}:{txt:x};
+const mk=it=>{const[t,k,em]=it,sen=k.includes(' '),sp=sen?k.split(' '):[...k],cz=sen?sp.length-1:0;return{t,k,em,sen,sp,cz,ans:sp[cz],img:hint&&em?{big:em}:{}}};
+const B=[c=>({t:'baca',q:'Baca nyaring',...bg(c.t.length==1?c.t.toUpperCase()+' '+c.t:c.t),say:c.t,mic:1}),
+c=>({t:'pilih',q:'Dengar, lalu pilih',say:c.t,o:O(c.t,pool,4),a:c.t}),
+c=>({t:'pilih',q:c.em?'Mana kata untuk gambar ini?':'Dengar, pilih katanya',...(c.em?{big:c.em}:{}),say:c.k,o:O(c.k,kp,4),a:c.k}),
+c=>({t:'susun',q:'Susun dengan urutan yang benar',...c.img,say:c.k,u:c.sp,j:c.sen?' ':'',a:c.k}),
+c=>({t:'pilih',q:'Lengkapi: '+c.sp.map((u,i)=>i==c.cz?'_':u).join(c.sen?' ':''),...c.img,say:c.k,o:O(c.ans,AU,4),a:c.ans}),
+c=>({t:'pilih',q:'Dengar, pilih tulisannya',say:c.k,o:O(c.k,kp,4),a:c.k}),
+c=>({t:'tulis',q:'Jejak tulisan ini',trace:c.t.length==1?c.t+' '+c.t.toUpperCase():c.sp[0],say:c.t}),
+c=>({t:'tulis',q:'Tulis sendiri: '+(hint?c.t:'(dari ingatan)'),...c.img,say:c.t}),
+c=>({t:'pilih',q:'Cepat! Dengar, lalu pilih',say:c.t,o:O(c.t,pool,6),a:c.t,time:tm}),
+c=>({t:'tulis',q:'Dengar, lalu tulis',say:c.k})];
+return B.map((f,j)=>{const c=mk(items[j%items.length]);return{...f(c),w:c.t}})}
+let R=null,tm=0;
+const listen=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){txt('#rf','Mikrofon belum didukung di perangkat ini. Tekan Sudah baca.');return}try{const r=new SR();r.lang='id-ID';r.onresult=v=>txt('#rf','Ria dengar: '+v.results[0][0].transcript);r.onerror=()=>txt('#rf','Mikrofon belum bisa dipakai. Izinkan mikrofon di browser.');r.start();txt('#rf','Ria mendengarkan... ayo baca!')}catch(x){txt('#rf','Mikrofon belum bisa dipakai.')}};
+function play(lv,si,r){const n=SUB[lv][si][3],ph=phase(r,n),it=roundItems(lv,si,r);R={lv,si,r,ph,it,ex:makeEx(lv,it,ph),i:0,ok:0,bad:[],res:[],start:Date.now()};show('rd');txt('#rt',SUB[lv][si][0]+' · Ronde '+(r+1)+' · '+PH[ph]);step()}
+$('#rx').onclick=()=>{clearInterval(tm);show('home')};
+function step(){clearInterval(tm);const e=R.ex[R.i];$('#rb').style.width=(R.i*10)+'%';txt('#rs','★ '+R.ok);txt('#rf','');$('#rq').textContent=e.q;const b=$('#rbody');b.innerHTML='';
+if(e.big){const d=document.createElement('div');d.className='big';d.textContent=e.big;b.append(d)}
+if(e.txt){const d=document.createElement('p');d.className='say';d.style.textAlign='left';d.textContent=e.txt;b.append(d)}
+const done=c=>{clearInterval(tm);if(c)R.ok++;else if(e.w)R.bad.push(e.w);R.res.push(!!c);txt('#rf',c?'Hebat! 🎉':'Ayo coba lagi nanti 💪');b.querySelectorAll('button').forEach(x=>x.disabled=true);setTimeout(()=>{R.i++;R.i<10?step():finish()},900)};
+const next=(t,f)=>{const x=document.createElement('button');x.className='go';x.textContent=t;x.style.width='100%';x.onclick=f;b.append(x)};
+if(e.t=='baca'){next('🔊 Dengar Ria',()=>say(e.say));if(e.mic)next('🎤 Aku baca',listen);next('Sudah baca ✓',()=>done(true))}
+if(e.t=='pilih'){const w=document.createElement('div');w.className='ctr';e.o.forEach(o=>{const x=document.createElement('button');x.className='go alt opt';x.textContent=o;if(String(o).length>8)x.style.fontSize='1.05rem';x.onclick=()=>{x.classList.add(o==e.a?'ok':'no');done(o==e.a)};w.append(x)});b.append(w);
+if(e.time){let t=e.time;tm=setInterval(()=>{t--;txt('#rf','⏱ '+t);if(t<=0)done(false)},1000)}}
+if(e.t=='susun'){const got=[],o=document.createElement('div'),w=document.createElement('div');o.className='say';o.textContent='…';w.className='ctr';shuf(e.u).forEach(c=>{const x=document.createElement('button');x.className='go alt opt';x.textContent=c;if(c.length>8)x.style.fontSize='1.05rem';x.onclick=()=>{x.disabled=true;got.push(c);o.textContent=got.join(e.j);if(got.length==e.u.length)done(got.join(e.j)==e.a)};w.append(x)});b.append(o,w)}
+if(e.t=='tulis'){const c=document.createElement('canvas');c.width=300;c.height=200;c.style.cssText='display:block;margin:10px auto;width:100%;max-width:320px;border:3px dashed var(--ink);border-radius:16px;touch-action:none';const x=c.getContext('2d'),col=getComputedStyle(document.body).color;
+if(e.trace){x.font='bold '+Math.min(120,Math.floor(300/Math.max(e.trace.length*.6,1)))+'px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillStyle='rgba(136,136,160,.45)';x.fillText(e.trace,150,105)}
+x.lineWidth=7;x.lineCap='round';x.strokeStyle=col;let d=false;const pt=ev=>{const r=c.getBoundingClientRect();return[(ev.clientX-r.left)*300/r.width,(ev.clientY-r.top)*200/r.height]};
+c.onpointerdown=ev=>{d=true;x.beginPath();const p=pt(ev);x.moveTo(p[0],p[1]);c.setPointerCapture(ev.pointerId)};c.onpointermove=ev=>{if(!d)return;const p=pt(ev);x.lineTo(p[0],p[1]);x.stroke()};c.onpointerup=()=>{d=false};b.append(c);
+next('🔊 Dengar Ria',()=>say(e.say));next('Sudah menulis ✓',()=>done(true))}
+say(e.say)}
+function placement(){const ex=[];for(let L=0;L<10;L++){const D=DATA[L],it=D[Math.floor(Math.random()*D.length)],po=[...new Set(D.map(x=>x[0]))];ex.push({t:'pilih',q:'Level '+(L+1)+': dengar, lalu pilih',say:it[0],o:shuf([it[0],...shuf(po.filter(x=>x!=it[0])).slice(0,3)]),a:it[0]})}
+R={place:1,ex,i:0,ok:0,bad:[],res:[],start:Date.now()};show('rd');txt('#rt','Tes penempatan');step()}
+async function placeFinish(){let n=0;while(n<10&&R.res[n])n++;$('#rb').style.width='100%';txt('#rq','Hasil tes penempatan');$('#rbody').innerHTML='<div class="big">🦜</div><p class="say">Level 1 sampai '+(n+1)+' dibuka.</p>';txt('#rf','');
+if(n>P.max){P.max=n;if(!(T||G))try{await updateDoc(doc(fs,'players',uid),{max:P.max})}catch(e){txt('#rf','Belum tersimpan. Periksa internet.')}}
+const x=document.createElement('button');x.className='go';x.style.width='100%';x.textContent='Ke peta level';x.onclick=()=>show('home');$('#rbody').append(x)}
+const nRonde=()=>Object.values(P.r).filter(v=>v>0).length;
+function renderHx(){const t=new Date().toDateString(),y=new Date(Date.now()-DAY).toDateString(),sk=P.sk&&(P.sk.d==t||P.sk.d==y)?P.sk.n:0;
+$('#hx').innerHTML=`<div class="card"><b>⭐ ${P.st||0} bintang · ✅ ${nRonde()} ronde · 🔥 ${sk} hari</b><div class="row"><button class="go alt" data-hx="pl">🚀 Tes penempatan</button><button class="go alt" data-hx="wa">📲 Laporan WhatsApp</button>${P.max>=10?'<button class="go" data-hx="ct">🎓 Sertifikat</button>':''}</div></div>`}
+$('#hx').onclick=e=>{const k=e.target.dataset.hx;if(k=='pl')placement();if(k=='ct')cert();if(k=='wa')window.open('https://wa.me/?text='+encodeURIComponent('Laporan Bacaria Kids: '+cur+'\nLevel terbuka: '+(P.max+1)+'\nBintang: '+(P.st||0)+'\nRonde selesai: '+nRonde()+'\nPerlu dilatih: '+(Object.keys(P.ms||{}).slice(0,8).join(', ')||'-')),'_blank')};
+function cert(){$('#cert').innerHTML=`<h1>🎓 SERTIFIKAT KELULUSAN</h1><p>Bacaria Kids by Tamberia Education</p><h2>"AKU SUDAH PINTAR MEMBACA!"</h2><p>Diberikan kepada</p><h1>${esc(P.nl||cur)}</h1><p>yang telah menyelesaikan Level 1 sampai Level 10 pada ${fmtD(Date.now())}</p><p style="margin-top:60px">Guru / Pembimbing ____________ &nbsp; Orang Tua / Wali ____________</p><p class="no"><button class="go" onclick="window.print()">Cetak</button> <button class="go alt" onclick="document.getElementById('cert').classList.remove('on')">Tutup</button></p>`;$('#cert').classList.add('on')}
+async function finish(){if(R.place)return placeFinish();const{lv,si,r,ph}=R,n0=R.ok>=9?3:R.ok>=7?2:R.ok>=5?1:0,n=ph==4&&R.ok<8?0:n0,key=rk(lv,si,r),sb=SUB[lv],last=r==sb[si][3]-1;
+$('#rb').style.width='100%';$('#rq').textContent=n?'Ronde selesai! '+star(n):ph==4?'Ujian belum lulus (perlu benar 8 dari 10). Ulangi ya!':'Ayo ulang rondenya!';
+$('#rbody').innerHTML='<div class="big">'+(n?'🦜🎉':'🦜💪')+'</div><p class="say">Benar '+R.ok+' dari 10</p>';
+const mn=Math.round((Date.now()-R.start)/6e4*10)/10;let tot=mn;try{const k='bk_t'+new Date().toDateString();tot=+(localStorage.getItem(k)||0)+mn;localStorage.setItem(k,tot)}catch(e){}
+txt('#rf',S.batas&&tot>=S.batas?'Waktu belajar hari ini sudah cukup. Ria ajak istirahat dulu ya 😴':'');
+const b=$('#rbody'),mk=(t,f)=>{const x=document.createElement('button');x.className='go';x.textContent=t;x.style.width='100%';x.style.marginTop='8px';x.onclick=f;b.append(x)};
+if(n&&!last)mk('Ronde berikutnya',()=>play(lv,si,r+1));if(n&&last&&si<sb.length-1)mk('Sub-level berikutnya',()=>{show('home');rondeList(lv,si+1)});
+mk('Ulangi ronde',()=>play(lv,si,r));mk('Kembali ke peta',()=>{show('home');rondeList(lv,si)});
+if(n>(P.r[key]||0))P.r[key]=n;P.ms=P.ms||{};R.bad.forEach(w=>{P.ms[w]=(P.ms[w]||0)+1});if(n)R.it.forEach(it=>{const w=it[0];if(w&&P.ms[w]&&!R.bad.includes(w)){P.ms[w]--;if(P.ms[w]<=0)delete P.ms[w]}});
+P.ms=Object.fromEntries(Object.entries(P.ms).sort((a,c)=>c[1]-a[1]).slice(0,30));
+const td=new Date().toDateString(),yd=new Date(Date.now()-DAY).toDateString();if(!P.sk||P.sk.d!=td)P.sk={d:td,n:P.sk&&P.sk.d==yd?P.sk.n+1:1};
+if(ph==4&&n&&si==lastReq(lv)&&P.max<=lv)P.max=lv+1;P.st=Object.values(P.r).reduce((a,v)=>a+v,0);
+if(!(T||G))try{await updateDoc(doc(fs,'players',uid),{r:P.r,st:P.st,max:P.max,ms:P.ms,sk:P.sk})}catch(e){txt('#rf','Kemajuan belum tersimpan. Periksa internet atau masa aktif akun.')}}
+</script>
+</body>
+</html>
